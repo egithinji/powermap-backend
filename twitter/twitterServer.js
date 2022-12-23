@@ -21,7 +21,7 @@ const options = {
 setInterval(() => {
     let now = new Date();
     let elapsed = Math.abs((now.getTime() - lastKeepAlive.getTime())/1000) ;
-    if (elapsed > 30) {
+    if (elapsed > 60) {
         console.log('keep alive time elapsed: destroying connection')
         // destroying the connection will triggers an 'error' event
         // either  on the response object or on the request object
