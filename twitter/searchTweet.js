@@ -1,4 +1,4 @@
-const { search_tweet } = require('../tweet-processor/pkg');
+const { search_tweet } = require('../rust-modules/pkg');
 const area_descs = ['apple', 'maple', 'Snapple'];
 const text = 'Nobody likes maple in their apple flavored Snapple.';
 const match = search_tweet(text, area_descs);

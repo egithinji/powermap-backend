@@ -1,4 +1,4 @@
-const { random_point } = require('../tweet-processor/pkg');
+const { random_point } = require('../rust-modules/pkg');
 
 const coords = [
     [34.10327911376953, 0.4679007974068897],

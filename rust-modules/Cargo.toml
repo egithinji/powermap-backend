@@ -1,5 +1,5 @@
 [package]
-name = "tweet-processor"
+name = "rust-modules"
 version = "0.1.0"
 authors = ["Eric Githinji <ericgithinji@gmail.com>"]
 edition = "2018"

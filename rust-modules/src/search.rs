@@ -1,6 +1,6 @@
 use aho_corasick::AhoCorasick;
 
-pub fn search(text: &str, patterns: &[String]) -> Option<usize> {
+pub fn search_impl(text: &str, patterns: &[String]) -> Option<usize> {
     let ac = AhoCorasick::new(patterns);
     let mut matches = vec![];
     for mat in ac.find_iter(text) {
