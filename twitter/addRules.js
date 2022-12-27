@@ -1,7 +1,6 @@
 const axios = require("axios");
 require('dotenv').config();
 
-console.log('adding rules');
 const rules = JSON.parse(process.env.RULES);
 const ruleAdder = {
     add: []
@@ -14,6 +13,7 @@ rules.forEach(rule => {
 });
 
 exports.addRules = function() {
+    console.log('adding rules');
     axios({
         method: 'post',
         url: 'https://api.twitter.com/2/tweets/search/stream/rules',

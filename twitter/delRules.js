@@ -1,7 +1,6 @@
 const axios = require("axios");
 require('dotenv').config();
 
-console.log('deleting unwanted rules');
 const rules = JSON.parse(process.env.DEL_RULES);
 const ruleDeleter = {
     delete: {
@@ -13,6 +12,7 @@ rules.forEach(rule => {
 });
 
 exports.delRules = function() {
+    console.log('deleting unwanted rules');
     axios({
         method: 'post',
         url: 'https://api.twitter.com/2/tweets/search/stream/rules',
