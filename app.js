@@ -5,7 +5,8 @@ var logger = require('morgan');
 
 const indexRouter = require('./routes/index');
 const featuresRouter = require('./routes/features');
-
+const cors = require('cors');
+const nocache = require("nocache");
 var app = express();
 
 // Set up mongoose connection
@@ -21,6 +22,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
+app.use(nocache());
 
 app.use('/', indexRouter);
 app.use('/api/v1/features', featuresRouter);
