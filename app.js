@@ -14,6 +14,7 @@ const mongoDB = "mongodb+srv://library:ZEO5uzfoHOvpsE6n@cluster0.qkhblew.mongodb
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
+require('./twitter/twitterServer');
 
 app.use(logger('dev'));
 app.use(express.json());
