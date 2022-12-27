@@ -36,8 +36,8 @@ function propertiesCreate(text, posted_on, area, cb) {
     propertiesArray.push(properties);
 }
 
-function featureCreate(type, geometry, properties, id, cb) {
-    const details = {type, geometry, properties, id};
+function featureCreate(type, geometry, properties, cb) {
+    const details = {type, geometry, properties};
     const feature = new Feature(details);
     feature.save(function (err) {
         if (err) {
@@ -55,11 +55,11 @@ function createGeometry() {
 }
 
 function createProperties() {
-   propertiesCreate("@KenyaPower_Care kindly assist Muthiga area.. Some lines have power outage since 1pm.", new Date(), "muthiga"); 
+   propertiesCreate("This is a test tweet.", new Date(), "somewhere"); 
 }
 
 function createFeature(cb) {
-    featureCreate("Feature", geometriesArray[0], propertiesArray[0], 351, cb);
+    featureCreate("Feature", geometriesArray[0], propertiesArray[0], cb);
 }
 
 createGeometry();

@@ -9,7 +9,6 @@ const FeatureSchema = new Schema({
     properties: {
        type: Object, 
     },
-    id: { type: Number, required: true },
 });
 
 module.exports = mongoose.model("Feature", FeatureSchema);
