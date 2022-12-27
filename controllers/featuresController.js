@@ -1,5 +1,6 @@
 const Feature = require('../models/feature');
 const Stats = require('../models/objects/stats');
+const { format } = require('date-fns');
 
 exports.today_features = (req, res, next) => {
     const today = new Date();
@@ -7,11 +8,27 @@ exports.today_features = (req, res, next) => {
     const endOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
     Feature.find({ "properties.posted_on":  { $gte: startOfToday, $lt: endOfToday } })
     .exec((err, features) => {
+        features = features.map(f => {
+            const date = new Date(f.properties.posted_on);
+            return {
+                type: f.type,
+                geometry: f.geometry,
+                properties: {
+                    text: f.properties.text,
+                    posted_on: format(date, 'do MMM yyyy, h:mm:ss a'),
+                    area: f.properties.area
+                }
+            }
+        })
         if (err) {
             console.log("Error retreiving features.");
             return  next(err);
         }
-        return res.json(features);
+        const featureCollection = {
+            type: 'FeatureCollection',
+            features
+        }
+        return res.json(featureCollection);
     });
 };
 
