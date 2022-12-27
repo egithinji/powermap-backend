@@ -3,6 +3,7 @@ mod search;
 mod utils;
 
 use wasm_bindgen::prelude::*;
+extern crate console_error_panic_hook;
 
 /// Takes some text and a list of patterns.
 /// If one of the patterns is found in the text, returns the index of the pattern in the list.
@@ -22,6 +23,7 @@ pub fn search_tweet(text: String, patterns: JsValue) -> i32 {
 /// Returns coordinate of random point within the polygon.
 #[wasm_bindgen]
 pub fn random_point(coords: JsValue) -> JsValue {
+    console_error_panic_hook::set_once();
     let coords: Vec<Vec<f64>> = serde_wasm_bindgen::from_value(coords).unwrap();
     let r = random::random_point_impl(&coords[..]);
     serde_wasm_bindgen::to_value(&r).unwrap()

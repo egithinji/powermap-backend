@@ -383,6 +383,27 @@ module.exports.__wbg_floor_182f4f67bb2a06bd = typeof Math.floor == 'function' ? 
 
 module.exports.__wbg_random_656f2ae924b2540e = typeof Math.random == 'function' ? Math.random : notDefined('Math.random');
 
+module.exports.__wbg_new_abda76e883ba8a5f = function() {
+    const ret = new Error();
+    return addHeapObject(ret);
+};
+
+module.exports.__wbg_stack_658279fe44541cf6 = function(arg0, arg1) {
+    const ret = getObject(arg1).stack;
+    const ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+    const len0 = WASM_VECTOR_LEN;
+    getInt32Memory0()[arg0 / 4 + 1] = len0;
+    getInt32Memory0()[arg0 / 4 + 0] = ptr0;
+};
+
+module.exports.__wbg_error_f851667af71bcfc6 = function(arg0, arg1) {
+    try {
+        console.error(getStringFromWasm0(arg0, arg1));
+    } finally {
+        wasm.__wbindgen_free(arg0, arg1);
+    }
+};
+
 module.exports.__wbindgen_debug_string = function(arg0, arg1) {
     const ret = debugString(getObject(arg1));
     const ptr0 = passStringToWasm0(ret, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
