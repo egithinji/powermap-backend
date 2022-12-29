@@ -32,7 +32,7 @@ exports.today_features = (req, res, next) => {
     });
 };
 
-exports.today_stats = (req, res) => {
+exports.today_stats = (req, res, next) => {
     const today = new Date();
     const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
     const endOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
@@ -53,7 +53,11 @@ exports.today_stats = (req, res) => {
             topOutages.push({area, count: top[area]});
         }
         topOutages.sort((a,b) => b.count - a.count);
-        const top3 = [topOutages[0], topOutages[1], topOutages[2]];
+        const top3 = [];
+        for (let i=0; i<3; i++) {
+            if (i == topOutages.length) break;
+            top3[i] = topOutages[i];
+        }
 
         const stats = new Stats(top3, total);
         return res.json(stats);
