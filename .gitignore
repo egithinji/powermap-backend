@@ -1,2 +1,4 @@
 node_modules/*
 .env
+twitter/storeAreaDescs.js
+twitter/storePolygons.js
