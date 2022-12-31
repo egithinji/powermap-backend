@@ -30,7 +30,7 @@ app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.use(nocache());
-app.use(helmet());
+//app.use(helmet());
 
 app.use('/', indexRouter);
 app.use('/api/v1/features', featuresRouter);
