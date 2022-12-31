@@ -47,6 +47,7 @@ app.get('/stream', (req, res, next) => {
     emitter.on('new-feature',() => {
         debug(`A new-feature event has been detected.`);
         res.write(`data: new feature added\n\n`);
+        res.flush();
     });
 });
 
