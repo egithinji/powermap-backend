@@ -9,7 +9,9 @@ exports.today_features = (req, res, next) => {
     Feature.find({ "properties.posted_on":  { $gte: startOfToday, $lt: endOfToday } })
     .exec((err, features) => {
         features = features.map(f => {
-            const date = new Date(f.properties.posted_on);
+            let date = new Date(f.properties.posted_on);
+            //convert date to Kenyan time
+            date = new Date(date.toLocaleString('en-US', {timeZone: 'Africa/Nairobi'}))
             return {
                 type: f.type,
                 geometry: f.geometry,
