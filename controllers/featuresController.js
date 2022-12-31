@@ -1,6 +1,7 @@
 const Feature = require('../models/feature');
 const Stats = require('../models/objects/stats');
 const { format } = require('date-fns');
+const { formatInTimeZone } = require('date-fns-tz');
 
 exports.today_features = (req, res, next) => {
     const today = new Date();
@@ -11,13 +12,13 @@ exports.today_features = (req, res, next) => {
         features = features.map(f => {
             let date = new Date(f.properties.posted_on);
             //convert date to Kenyan time
-            date = new Date(date.toLocaleString('en-US', {timeZone: 'Africa/Nairobi'}))
+            date = formatInTimeZone(date, 'Africa/Nairobi', 'do MMM yyyy, h:mm:ss a');
             return {
                 type: f.type,
                 geometry: f.geometry,
                 properties: {
                     text: f.properties.text,
-                    posted_on: format(date, 'do MMM yyyy, h:mm:ss a'),
+                    posted_on: date,
                     area: f.properties.area
                 }
             }
