@@ -43,6 +43,7 @@ app.get('/stream', (req, res, next) => {
       };
     res.writeHead(200, headers);
     res.write(`data: connected to sse\n\n`);
+    res.flush();
     emitter.on('new-feature',() => {
         debug(`A new-feature event has been detected.`);
         res.write(`data: new feature added\n\n`);
