@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors());
+app.use(cors({ origin: 'https://www.power-map.io' }));
 app.use(nocache());
 //app.use(helmet());
 
