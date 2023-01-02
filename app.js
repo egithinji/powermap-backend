@@ -15,8 +15,9 @@ const app = express();
 // Set up mongoose connection
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', false);
-const dev_db_url = process.env.DEV_DB_URL;
-const mongoDB = process.env.MONGODB_URI || dev_db_url;
+//const dev_db_url = process.env.DEV_DB_URL;
+const mongoDB = process.env.NODE_ENV === 'production' ? process.env.MONGODB_URI : process.env.DEV_DB_URL; 
+//const mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
@@ -31,10 +32,10 @@ app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors({ origin: 'https://www.power-map.io' }));
 app.use(nocache());
-/*app.use(helmet({
+app.use(helmet({
     crossOriginEmbedderPolicy: false,
     crossOriginResourcePolicy: false
-}));*/
+}));
 
 app.use('/', indexRouter);
 app.use('/api/v1/features', featuresRouter);
