@@ -37,7 +37,7 @@ const debug = require("debug")("twitterServer");
 
 const processTweet = (chunk, patterns, areaDescriptions) => {
         const tweet = JSON.parse(chunk);
-        debug(`received tweet: ${tweet.data.text} id: ${tweet.data.id}`);
+        debug(`received tweet: ${tweet.data.text} tweet id: ${tweet.data.id}`);
         const match = search_tweet(tweet.data.text.toLowerCase(), patterns);
         debug(`match is: ${match}`);
         try {
