@@ -31,7 +31,10 @@ app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors({ origin: 'https://www.power-map.io' }));
 app.use(nocache());
-//app.use(helmet());
+app.use(helmet({
+    crossOriginEmbedderPolicy: false,
+    crossOriginResourcePolicy: false
+}));
 
 app.use('/', indexRouter);
 app.use('/api/v1/features', featuresRouter);
