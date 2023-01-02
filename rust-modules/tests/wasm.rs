@@ -14,6 +14,17 @@ fn search_functionality_works() {
 }
 
 #[wasm_bindgen_test]
+fn only_matches_separate_words_works() {
+    let area_descs = vec!["embu", "pangani", "langata"];
+    let text = "RT @systembuisnesses your partner of choice.".to_string();
+
+    assert_eq!(
+        search_tweet(text, serde_wasm_bindgen::to_value(&area_descs).unwrap()),
+        -1
+    );
+}
+
+#[wasm_bindgen_test]
 fn get_random_point_works() {
     let coords = [
         [34.10327911376953, 0.4679007974068897],
