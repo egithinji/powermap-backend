@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 const featuresRouter = require('./routes/features');
@@ -14,7 +15,7 @@ const app = express();
 // Set up mongoose connection
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', false);
-const dev_db_url = "mongodb+srv://library:ZEO5uzfoHOvpsE6n@cluster0.qkhblew.mongodb.net/powermap?retryWrites=true&w=majority";
+const dev_db_url = process.env.DEV_DB_URL;
 const mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;

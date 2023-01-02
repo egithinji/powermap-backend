@@ -37,6 +37,3 @@ function polygonCreate(area, coordinates) {
 let p = getPolygon('./twitter/polygons/87_kinoo.txt');
 console.log(p.area);
 polygonCreate(p.area, p.coordinates);
-
-// All done, disconnect from database
-//mongoose.connection.close();
