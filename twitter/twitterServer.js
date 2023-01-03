@@ -48,7 +48,7 @@ const processTweet = (chunk, patterns, areaDescriptions) => {
             debug(`random point: ${r}`);
             debug(`adding new feature to db`);
             const geometry = new Geometry('Point', r);
-            const properties = new Properties(tweet.data.text, new Date(), patterns[match]);
+            const properties = new Properties(tweet.data.text, new Date(), areaDescriptions[match].polygon.area);
             const details = {type: 'Feature', geometry, properties};
             const feature = new Feature(details);
             feature.save(err => {
