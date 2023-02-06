@@ -2,6 +2,8 @@ const Feature = require('../models/feature');
 const Stats = require('../models/objects/stats');
 const { format } = require('date-fns');
 const { formatInTimeZone } = require('date-fns-tz');
+const fs = require('fs');
+const pushNewPolygon = require('../pushNewPolygon');
 
 exports.today_features = (req, res, next) => {
     const today = new Date();
@@ -65,4 +67,19 @@ exports.today_stats = (req, res, next) => {
         const stats = new Stats(top3, total);
         return res.json(stats);
     });
+};
+
+exports.add_polygon = (req, res, next) => {
+    console.log(`Received new area data. Writing to file...`);
+    const geojson = req.body.geojson;
+    const data = JSON.stringify(req.body, null, 2);
+    fs.writeFile('newPolygon.json', data, (err) => {
+        if (err) {
+            console.log('error writing new area to file');
+            next(err);
+        }
+        console.log('New area data written to file.');
+        pushNewPolygon();
+    });
+    return res.json({'success': true})
 };
