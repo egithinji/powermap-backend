@@ -11,7 +11,7 @@ const pushNewPolygon = () => {
         exec('git add newPolygon.json');
         exec('git commit -m "From script: New polygon."');
         exec(`git remote add origin https://${process.env.GITHUB_TOKEN}@github.com/egithinji/powermap-backend`);
-        exec(`git push https://${GITHUB_TOKEN}@github.com/egithinji/powermap-backend.git`);
+        exec(`git push https://${process.env.GITHUB_TOKEN}@github.com/egithinji/powermap-backend.git`);
         console.log('finished git commands');
     } catch (err) {
         console.error(`Error pushing new polygon: ${err}`);
