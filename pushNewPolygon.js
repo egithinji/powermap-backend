@@ -7,19 +7,21 @@ require('dotenv').config();
 const pushNewPolygon = () => {
     try {
         //console.log(execSync(`git init`).toString());
-        
         //execSync(`git remote add origin https://${process.env.GITHUB_TOKEN}@github.com/egithinji/powermap-backend`);
         execSync(`git clone https://${process.env.GITHUB_TOKEN}@github.com/egithinji/powermap-backend.git`);
         execSync(`cp newPolygon.json powermap-backend`);
-        execSync(`cd powermap-backend`);
-        execSync('git config user.name egithinji');
-        execSync('git config user.email ericgithinji@gmail.com');
-        execSync(`git checkout -b newpolygon`);
-        execSync(`git add newPolygon.json`);
-        execSync(`git commit -m 'New polygon added'`);
-        console.log(execSync(`git push https://${process.env.GITHUB_TOKEN}@github.com/egithinji/powermap-backend`).toString());
-        execSync(`cd ..`);
-        execSync(`rm -r powermap-backend`);
+        const command = `
+            cd powermap-backend
+            git config user.name egithinji
+            git config user.email ericgithinji@gmail.com
+            git checkout -b newpolygon
+            git add newPolygon.json
+            git commit -m "New polygon added"
+            git push https://${process.env.GITHUB_TOKEN}@github.com/egithinji/powermap-backend
+            cd ..
+            rm -r powermap-backend 
+        `;
+        execSync(command, { stdio: "inherit" });
         console.log('finished git commands');
     } catch (err) {
         console.error(`Error pushing new polygon: ${err}`);
