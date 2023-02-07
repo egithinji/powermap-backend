@@ -13,8 +13,9 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
     - name: Use Node.js
       uses: actions/setup-node@v3
+    - uses: actions/checkout@v3
+    - run: npm install
     - run: echo "Adding the new polygon to the db"
     - run: node addPolygonToDb.js
