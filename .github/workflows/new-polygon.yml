@@ -1,4 +1,5 @@
 name: Add New Polygon
+
 on:
   pull_request:
     types:
@@ -8,6 +9,9 @@ on:
     paths:
       - 'newPolygon.json'
 
+env: 
+  DEV_DB_URL: ${{ secrets.DEV_DB_URL }}
+
 jobs:
   if_merged:
     if: github.event.pull_request.merged == true
@@ -15,8 +19,6 @@ jobs:
     steps:
     - name: Use Node.js
       uses: actions/setup-node@v3
-      env: 
-        DEV_DB_URL: ${{ secrets.DEV_DB_URL }}
     - uses: actions/checkout@v3
     - run: npm install
     - run: echo "Adding the new polygon to the db"
