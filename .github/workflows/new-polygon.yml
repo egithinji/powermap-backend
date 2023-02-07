@@ -6,7 +6,7 @@ on:
     branches:
       - main 
     paths:
-      - 'newPolygon.js'
+      - 'newPolygon.json'
 
 jobs:
   if_merged:
