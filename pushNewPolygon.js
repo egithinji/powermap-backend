@@ -8,6 +8,8 @@ const pushNewPolygon = () => {
     try {
         console.log(execSync(`git init`).toString());
         console.log(`after git init, git status is: ${execSync('git status').toString()}`);
+        execSync('git config user.name egithinji');
+        execSync('git config user.email ericgithinji@gmail.com');
         execSync(`git remote add origin https://${process.env.GITHUB_TOKEN}@github.com/egithinji/powermap-backend`);
         execSync(`git fetch origin`);
         execSync(`git checkout -b newpolygon`);
