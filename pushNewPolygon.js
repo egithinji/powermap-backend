@@ -6,13 +6,12 @@ require('dotenv').config();
 
 const pushNewPolygon = () => {
     try {
-        console.log(execSync(`git clone https://${process.env.GITHUB_TOKEN}@github.com/egithinji/powermap-backend`).toString());
-        console.log(`after cloning, git status output is: ${execSync('git status').toString()}`);
-        execSync('git checkout -b newpolygon');
-        execSync('git add newPolygon.json');
-        execSync('git commit -m "From script: New polygon."');
+        console.log(execSync(`git init`).toString());
+        console.log(`after git init, git status is: ${execSync('git status').toString()}`);
         execSync(`git remote add origin https://${process.env.GITHUB_TOKEN}@github.com/egithinji/powermap-backend`);
-        execSync(`git push https://${process.env.GITHUB_TOKEN}@github.com/egithinji/powermap-backend.git`);
+        execSync(`git fetch origin`);
+        execSync(`git checkout -b newpolygon`);
+        console.log(`after checking out new branch, git status is: ${execSync('git status').toString()}`)
         console.log('finished git commands');
     } catch (err) {
         console.error(`Error pushing new polygon: ${err}`);
