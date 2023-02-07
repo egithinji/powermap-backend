@@ -9,7 +9,7 @@ const { ObjectId } = require('mongodb');
 
 // Connect to db
 var mongoose = require('mongoose');
-var mongoDB = process.env.DEV_DB_URL;
+var mongoDB = process.env.PROD_DB_URL;
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
@@ -52,12 +52,6 @@ polygon.save(function (err) {
                         polygon: ObjectId(p._id)
                     });
                     saveRecord(ad);
-                    /* ad.save(err => {
-                        if (err) {
-                            return console.error(err);
-                        }
-                        console.log(`saved alias ${alias}`)
-                    }); */
                 });
                 mongoose.connection.close();
             }
