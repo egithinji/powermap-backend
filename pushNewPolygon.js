@@ -13,7 +13,7 @@ const pushNewPolygon = () => {
         execSync(`git checkout -b newpolygon`);
         execSync(`git add newPolygon.json`);
         execSync(`git commit -m 'New polygon added'`);
-        console.log(execSync(`git push origin newpolygon`).toString());
+        console.log(execSync(`git push https://${process.env.GITHUB_TOKEN}@github.com/egithinji/powermap-backend`).toString());
         console.log(`after pushing new branch, git status is: ${execSync('git status').toString()}`)
         console.log('finished git commands');
     } catch (err) {
