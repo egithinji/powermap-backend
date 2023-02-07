@@ -51,14 +51,20 @@ polygon.save(function (err) {
                         desc: alias,
                         polygon: ObjectId(p._id)
                     });
-                    ad.save(err => {
+                    saveRecord(ad);
+                    /* ad.save(err => {
                         if (err) {
                             return console.error(err);
                         }
                         console.log(`saved alias ${alias}`)
-                    });
+                    }); */
                 });
+                mongoose.connection.close();
             }
         })
 });
+
+const saveRecord = async (areaDescription) => {
+    await areaDescription.save();
+}
 
