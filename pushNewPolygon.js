@@ -7,12 +7,13 @@ require('dotenv').config();
 const pushNewPolygon = () => {
     try {
         //console.log(execSync(`git init`).toString());
-        execSync('git config user.name egithinji');
-        execSync('git config user.email ericgithinji@gmail.com');
+        
         //execSync(`git remote add origin https://${process.env.GITHUB_TOKEN}@github.com/egithinji/powermap-backend`);
         execSync(`git clone https://${process.env.GITHUB_TOKEN}@github.com/egithinji/powermap-backend.git`);
         execSync(`cp newPolygon.json powermap-backend`);
         execSync(`cd powermap-backend`);
+        execSync('git config user.name egithinji');
+        execSync('git config user.email ericgithinji@gmail.com');
         execSync(`git checkout -b newpolygon`);
         execSync(`git add newPolygon.json`);
         execSync(`git commit -m 'New polygon added'`);
