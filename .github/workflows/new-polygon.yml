@@ -11,10 +11,12 @@ on:
 
 env: 
   DEV_DB_URL: ${{ secrets.DEV_DB_URL }}
+  PROD_DB_URL: ${{ secrets.PROD_DB_URL }}
 
 jobs:
   if_merged:
     if: github.event.pull_request.merged == true
+    name: Save new polygon to db
     runs-on: ubuntu-latest
     steps:
     - name: Use Node.js
@@ -22,5 +24,4 @@ jobs:
     - uses: actions/checkout@v3
     - run: npm install
     - run: echo "Adding the new polygon to the db"
-    - run: echo dev_db_url is $DEV_DB_URL
     - run: node addPolygonToDb.js
