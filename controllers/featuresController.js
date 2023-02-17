@@ -1,5 +1,6 @@
 const Feature = require('../models/feature');
 const Stats = require('../models/objects/stats');
+const Polygon = require('../models/polygon');
 const { format } = require('date-fns');
 const { formatInTimeZone } = require('date-fns-tz');
 const fs = require('fs');
@@ -68,6 +69,24 @@ exports.today_stats = (req, res, next) => {
         return res.json(stats);
     });
 };
+
+exports.area_list = (req, res, next) => {
+    Polygon.find().exec((err, polygons) => {
+        if (err){
+            console.log("Error retrieving polygons");
+            return next(err);
+        }
+
+        const areaList = [];
+        for (const polygon of polygons) {
+            areaList.push(polygon.area);
+        }
+        const response = {
+            areas: areaList,
+        };
+        return res.json(response);
+    });
+}
 
 exports.add_polygon = (req, res, next) => {
     console.log(`Received new area data. Writing to file...`);
