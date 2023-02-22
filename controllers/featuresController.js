@@ -12,6 +12,10 @@ exports.today_features = (req, res, next) => {
     const endOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
     Feature.find({ "properties.posted_on":  { $gte: startOfToday, $lt: endOfToday } })
     .exec((err, features) => {
+        if (err) {
+            console.log("Error retreiving features.");
+            return  next(err);
+        }
         features = features.map(f => {
             let date = new Date(f.properties.posted_on);
             //convert date to Kenyan time
@@ -26,10 +30,7 @@ exports.today_features = (req, res, next) => {
                 }
             }
         })
-        if (err) {
-            console.log("Error retreiving features.");
-            return  next(err);
-        }
+        
         const featureCollection = {
             type: 'FeatureCollection',
             features
