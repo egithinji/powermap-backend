@@ -6,6 +6,7 @@ require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 const featuresRouter = require('./routes/features');
+const dashboardRouter = require('./routes/dashboard');
 const cors = require('cors');
 const nocache = require("nocache");
 const compression = require("compression");
@@ -28,7 +29,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors({ origin: 'https://www.power-map.io' }));
+app.use(cors({ origin: `${process.env.NODE_ENV === 'development' ? 'http://localhost:5173' : 'https://www.power-map.io'}` }));
 app.use(nocache());
 app.use(helmet({
     crossOriginEmbedderPolicy: false,
@@ -37,6 +38,7 @@ app.use(helmet({
 
 app.use('/', indexRouter);
 app.use('/api/v1/features', featuresRouter);
+app.use('/api/v1/dashboard', dashboardRouter);
 // sse
 app.get('/stream', (req, res, next) => {
     const headers = {
