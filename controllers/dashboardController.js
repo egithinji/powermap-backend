@@ -1,6 +1,7 @@
 const Feature = require('../models/feature');
 const { formatInTimeZone } = require('date-fns-tz');
 const NUM_AREAS_PIE_CHART = 5;
+require('dotenv').config();
 const debug = require("debug")("dashboardController");
 
 exports.total_complaints_day = (req, res, next) => {
