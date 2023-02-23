@@ -1,8 +1,6 @@
 const Feature = require('../models/feature');
 const { formatInTimeZone } = require('date-fns-tz');
 const NUM_AREAS_PIE_CHART = 5;
-require('dotenv').config();
-const dashDebug = require("debug")("dashboardController");
 
 exports.total_complaints_day = (req, res, next) => {
     Feature.find()
@@ -39,8 +37,7 @@ exports.total_complaints_area = (req, res, next) => {
         });
         const result = [];
         let index = 0;
-        const array = Object.entries(totalComplaintsPerArea).sort((a,b) => (b[0]-a[0]));
-        dashDebug(`after sorting, area of area complaints is ${array}`);
+        const array = Object.entries(totalComplaintsPerArea).sort((a,b) => (b[1]-a[1]));
         for (const [key, value] of array) {
             const color = getRandomColor();
             if (index < NUM_AREAS_PIE_CHART) {
