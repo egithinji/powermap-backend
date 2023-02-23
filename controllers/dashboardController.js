@@ -1,6 +1,7 @@
 const Feature = require('../models/feature');
 const { formatInTimeZone } = require('date-fns-tz');
 const NUM_AREAS_PIE_CHART = 5;
+const debug = require("debug")("dashboard");
 
 exports.total_complaints_day = (req, res, next) => {
     Feature.find()
@@ -38,6 +39,7 @@ exports.total_complaints_area = (req, res, next) => {
         const result = [];
         let index = 0;
         const array = Object.entries(totalComplaintsPerArea).sort((a,b) => (b[0]-a[0]));
+        debug(`after sorting, area of area complaints is ${array}`);
         for (const [key, value] of array) {
             const color = getRandomColor();
             if (index < NUM_AREAS_PIE_CHART) {
